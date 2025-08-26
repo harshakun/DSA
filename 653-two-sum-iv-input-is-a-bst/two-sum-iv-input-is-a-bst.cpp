@@ -12,22 +12,21 @@
 class Solution {
 public:
     set<int> st; bool ans = false;
-    void solve(TreeNode* root, int k)
-    { if(root==nullptr) return;
+    bool solve(TreeNode* root, int k)
+    { if(root==nullptr) return false;
         if(st.find(root->val)==st.end())
         {
             if(st.find(k-root->val)!=st.end()) {
-                ans = true;
-                return;
+                // ans = true;
+                return true;
             }
             else 
             st.insert(root->val);
         }
-        solve(root->left,k);
-        solve(root->right,k);
+        return solve(root->left,k) || solve(root->right,k);
     }
     bool findTarget(TreeNode* root, int k) {
-       solve(root, k);
-       return ans;
+       return solve(root, k);
+       
     }
 };
