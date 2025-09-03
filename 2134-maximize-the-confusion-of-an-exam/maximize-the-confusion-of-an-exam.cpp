@@ -1,31 +1,24 @@
 class Solution {
 public:
     int maxConsecutiveAnswers(string answerKey, int k) {
-        int n = answerKey.size();
-        int c =0;
+        int ct=0, cf=0;
+        int i=0,j=0;
         int ans =0;
-        int i =0, j=0;
-        while(i<n)
+        int n = answerKey.size();
+        while(j<n)
         {
-            if(answerKey[i]=='F') c++;
-            if(c>k)
+            if(answerKey[j]=='T') ct++;
+            else cf++;
+
+            while(cf>k && ct >k)
             {
-                if(answerKey[j]=='F') c--;
-                j++;
+                if(answerKey[i]=='T') ct--;
+                else cf--;
+                i++;
             }
-            ans = max(ans, i-j+1);
-            i++;
-        } i=0;c=0;j=0;
-         while(i<n)
-        {
-            if(answerKey[i]=='T') c++;
-            if(c>k)
-            {
-                if(answerKey[j]=='T') c--;
-                j++;
-            }
-            ans = max(ans, i-j+1);
-            i++;
+            // int change = min(ct,cf);
+            ans = max(ans, j-i+1);
+            j++;
         }
         return ans;
     }
