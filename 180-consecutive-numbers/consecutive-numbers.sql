@@ -1,5 +1,6 @@
-/* Write your T-SQL query statement below */
-with cte as (
-    select *,lead(num) over (order by id) as le , lag(num) over(order by id) as lg from Logs
-)
-select distinct(num) as ConsecutiveNums  from cte where num= le and num = lg
+# Write your MySQL query statement below
+
+select distinct(a.num) as ConsecutiveNums from 
+(select id, num, lag(num,1,0) over(order by id) as prev ,
+lead (num,1,0) over (order by id ) as next from Logs) a
+where a.num = a.prev and a.num = a.next
