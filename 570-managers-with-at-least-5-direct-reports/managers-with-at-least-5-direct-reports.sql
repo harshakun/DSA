@@ -1,3 +1,2 @@
-/* Write your T-SQL query statement below */
-select b.name from (
-select distinct(managerId ) as m from Employee group by managerId  having count(managerId )>4) a join employee b on a.m=b.id
+select a.name as name from employee a join (
+select managerId from employee group by managerId having count(*)>=5) b on a.id = b.managerId
