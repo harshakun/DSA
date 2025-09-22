@@ -5,7 +5,7 @@ public:
         if(n==0) return 0;
         int ans =INT_MAX;
         if(dp[n]!=-1) return dp[n];
-        for(int i =1;i<=n;i++)
+        for(int i =1;i*i<=n;i++)
         {
             int sq = i*i;
 
